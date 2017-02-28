@@ -4,7 +4,19 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = window.__INITIAL_DATA__;
+  }
+  render() {
+    return (
+      <ArticleList {...this.state} />
+    );
+  }
+}
+
 ReactDOM.render(
-  <ArticleList {...window.__INITIAL_DATA__} />,
+  <App />,
   document.getElementById("root")
 );

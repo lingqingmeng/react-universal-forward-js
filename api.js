@@ -18,9 +18,13 @@ const data = {
 
 export const getArticles = () => {
   // no body...
-  return Promise.resolve(
-    articles
-  )
+  const _articles = {};
+
+  Object.values(articles).map(article => {
+    _articles[article.id] = { id: article.id, title: article.title };
+  });
+
+  return Promise.resolve(_articles);
 };
 
 export const getArticleInfo = (articleId) => {
