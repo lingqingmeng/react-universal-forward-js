@@ -3,20 +3,19 @@ const express = require('express');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-const Hello = (props) => {
-  return (
-    <div>
-      Hi {props.name}
-    </div>
-  );
-};
+import Hello from '../client/components/Hello';
 
 const app = express();
+app.use(express.static('public'));
+
+import markup from '../index.html';
 
 app.get('/:name', (req, res) => {
   res.send(
-    ReactDOMServer.renderToString(
-      <Hello name={req.params.name} />
+    markup(
+      ReactDOMServer.renderToString(
+        <Hello name={req.params.name} />
+      )
     )
   );
 });
