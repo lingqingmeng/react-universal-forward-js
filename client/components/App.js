@@ -1,10 +1,10 @@
-import Hello from './Hello';
+import ArticleList from './ArticleList';
 
 import React from 'react';
 
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-  <Hello name={window.__INITIAL_DATA__.name} />,
+  <ArticleList {...window.__INITIAL_DATA__} />,
   document.getElementById("root")
 );
