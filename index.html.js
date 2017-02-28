@@ -12,7 +12,7 @@ export default (initialMarkup) =>  {
     <div id="root">
       ${initialMarkup}
     </div>
-    <script src="/app.js" />
+    <script src="/app.js" charset="utf-8"></script>
   </body>
   </html>
   `;
