@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import ArticleList from './ArticleList';
 import FullArticle from './FullArticle';
+import Form from './Form';
 
 import * as apiAgent from '../apiAgent';
 
@@ -37,6 +38,7 @@ class App extends React.Component {
         <ArticleList
           onArticleClick={this.fetchArticleInfo}
           articles={this.state.articles} />
+        <Form />
         {this.displayCurrentArticle()}
       </div>
     );

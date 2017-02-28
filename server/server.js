@@ -4,6 +4,7 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
 import ArticleList from '../client/components/ArticleList';
+import Form from '../client/components/Form';
 
 const app = express();
 app.use(express.static('public'));
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
         ReactDOMServer.renderToString(
           <div>
             <ArticleList articles={articles} />
+            <Form />
           </div>
         ),
         { articles }
