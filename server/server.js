@@ -10,16 +10,24 @@ app.use(express.static('public'));
 
 import markup from '../index.html';
 
-import data from '../api';
+import { getArticles, getArticleInfo } from '../api';
 
 app.get('/', (req, res) => {
-  res.send(
-    markup(
-      ReactDOMServer.renderToString(
-        <ArticleList {...data} />
-      ),
-      data
-    ),
+  getArticles().then(articles =>
+    res.send(
+      markup(
+        ReactDOMServer.renderToString(
+          <ArticleList articles={articles} />
+        ),
+        { articles }
+      )
+    )
+  )
+});
+
+app.get('/api/articles/:articleId', (req, res) => {
+  getArticleInfo(req.params.articleId).then(articleInfo =>
+    res.send(articleInfo)
   );
 });
 

@@ -16,4 +16,17 @@ const data = {
   authors,
 };
 
+export const getArticles = () => {
+  // no body...
+  return Promise.resolve(
+    articles
+  )
+};
+
+export const getArticleInfo = (articleId) => {
+  const article = articles[articleId];
+  article.author = authors[article.authorId];
+  return Promise.resolve(article);
+};
+
 export default data;
