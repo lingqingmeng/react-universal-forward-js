@@ -1,33 +1,39 @@
-import ArticleList from './ArticleList';
-
 import React from 'react';
-
 import ReactDOM from 'react-dom';
+
+import ArticleList from './ArticleList';
+import FullArticle from './FullArticle';
 
 import * as apiAgent from '../apiAgent';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = window.__INITIAL_DATA__;
+    const { articles } = window.__INITIAL_DATA__;
+    this.state = { articles, currentArticleId: null };
   }
   fetchArticleInfo = (articleId) => {
     apiAgent.getArticleInfo(articleId)
       .then(article => {
-        this.setState({
-          currentArticleId: article.id,
-          articles: {
-            ...this.state.articles,
-            [article.id]: article,
-          }
+        this.setState((prevState) => {
+          return {
+            currentArticleId: article.id,
+            articles: {
+              ...prevState.articles,
+              [article.id]: article,
+            }
+          };
         })
       });
   }
   render() {
     return (
-      <ArticleList
-        onArticleClick={this.fetchArticleInfo}
-        {...this.state} />
+      <div>
+        <ArticleList
+          onArticleClick={this.fetchArticleInfo}
+          {...this.state} />
+        <FullArticle {...this.state.articles[0]} />
+      </div>
     );
   }
 }

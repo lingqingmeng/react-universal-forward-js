@@ -1,15 +1,21 @@
 import React from 'react';
 
-const Article = (props) => {
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  //
-  // };
-  return (
-    <div onClick={() => props.onClick(props.id)}>
-      <div>{props.title}</div>
-    </div>
-  );
+// state
+// lifecycle methods
+// handlers that use props
+class Article extends React.Component {
+  handleClick = (event) => {
+    event.preventDefault();
+    this.props.onClick(this.props.id);
+  };
+
+  render() {
+    return (
+      <div onClick={this.handleClick}>
+        <div>{this.props.title}</div>
+      </div>
+    );
+  }
 };
 
 export default Article;
