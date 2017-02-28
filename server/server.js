@@ -15,8 +15,9 @@ app.get('/:name', (req, res) => {
     markup(
       ReactDOMServer.renderToString(
         <Hello name={req.params.name} />
-      )
-    )
+      ),
+      { name: req.params.name }
+    ),
   );
 });
 
