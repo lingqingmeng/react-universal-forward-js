@@ -26,13 +26,18 @@ class App extends React.Component {
         })
       });
   }
+  displayCurrentArticle = () => {
+    if (!this.state.currentArticleId) { return; }
+
+    return <FullArticle {...this.state.articles[this.state.currentArticleId]} />;
+  };
   render() {
     return (
       <div>
         <ArticleList
           onArticleClick={this.fetchArticleInfo}
-          {...this.state} />
-        <FullArticle {...this.state.articles[0]} />
+          articles={this.state.articles} />
+        {this.displayCurrentArticle()}
       </div>
     );
   }

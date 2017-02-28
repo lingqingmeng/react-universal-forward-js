@@ -17,7 +17,9 @@ app.get('/', (req, res) => {
     res.send(
       markup(
         ReactDOMServer.renderToString(
-          <ArticleList articles={articles} />
+          <div>
+            <ArticleList articles={articles} />
+          </div>
         ),
         { articles }
       )
