@@ -1,33 +1,38 @@
 import React, { Component, PropTypes } from 'react';
 
 class Form extends Component {
-  // { body: ..., title: ... }
   state = {
     input: {
       title: '',
       body: '',
     }
-  }
+  };
   handleChange = (event) => {
-    event.persist();
+    const target = event.target;
     this.setState(prevState => ({
       input: {
         ...prevState.input,
-        [event.target.name]: event.target.value
+        [target.name]: target.value
       }
     }));
   };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.onSubmit(this.state.input);
+  }
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="title"
           onChange={this.handleChange}
           name="title"
+          required
           value={this.state.input.title} />
         <br/>
         <textarea cols="30" rows="10"
           onChange={this.handleChange}
           name="body"
+          required
           value={this.state.input.body}
           placeholder="article body..."></textarea>
         <br/>

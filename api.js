@@ -41,7 +41,9 @@ export const addArticle = (newArticleInfo) => {
 
   articles[newArticleInfo.id] = newArticleInfo;
 
-  return Promise.resolve(newArticleInfo);
+  return new Promise(function(resolve, reject) {
+    setTimeout(() => { resolve(newArticleInfo) }, 5000);
+  });
 };
 
 export default data;

@@ -32,13 +32,26 @@ class App extends React.Component {
 
     return <FullArticle {...this.state.articles[this.state.currentArticleId]} />;
   };
+  saveArticle = (articleInput) => {
+    // be optimistic
+    apiAgent.saveArticle(articleInput)
+      .then(newArticle => {
+        // confirm the save
+        this.setState(prevState => ({
+          articles: {
+            ...prevState.articles,
+            [newArticle.id]: newArticle,
+          }
+        }))
+      });
+  };
   render() {
     return (
       <div>
         <ArticleList
           onArticleClick={this.fetchArticleInfo}
           articles={this.state.articles} />
-        <Form />
+        <Form onSubmit={this.saveArticle} />
         {this.displayCurrentArticle()}
       </div>
     );
