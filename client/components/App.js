@@ -34,16 +34,21 @@ class App extends React.Component {
   };
   saveArticle = (articleInput) => {
     // be optimistic
-    apiAgent.saveArticle(articleInput)
-      .then(newArticle => {
-        // confirm the save
-        this.setState(prevState => ({
-          articles: {
-            ...prevState.articles,
-            [newArticle.id]: newArticle,
-          }
-        }))
-      });
+    const tempId = Date.now();
+    this.setState(prevState => ({
+      articles: {
+        ...prevState.articles,
+        [tempId]: articleInput,
+      }
+    }), (prevState) => {
+      apiAgent.saveArticle(articleInput)
+        .catch(
+          //rollback optimistic update
+          this.setState(prevState => ({
+            articles: prevState.articles.filter(article => article.id != tempId)
+          }))
+        )
+    })
   };
   render() {
     return (
