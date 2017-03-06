@@ -38,11 +38,11 @@ export const getArticleInfo = (articleId) => {
 export const addArticle = (newArticleInfo) => {
   // title, body
   newArticleInfo.id = uuidV4();
-
+  newArticleInfo.date = new Date()
   articles[newArticleInfo.id] = newArticleInfo;
 
   return new Promise(function(resolve, reject) {
-    setTimeout(() => { resolve(newArticleInfo) }, 5000);
+    setTimeout(() => { resolve(newArticleInfo) }, 500);
   });
 };
 
